@@ -1,0 +1,87 @@
+SELECT cursos.titulo, COUNT(unidades.titulo)
+FROM cursos
+INNER JOIN unidades
+GROUP BY cursos.titulo
+LIMIT 5
+.
+.
+.
+.
+SELECT cursos.titulo, AVG(unidades.titulo)
+FROM cursos
+INNER JOIN unidades
+GROUP BY cursos.titulo
+.
+.
+.
+.
+SELECT usuarios.apellido, usuarios_has_cursos.cursos_id AS cursos
+FROM usuarios
+INNER JOIN usuarios_has_cursos ON cursos >= 3
+.
+.
+.
+.
+.
+SELECT *
+FROM clases
+WHERE fecha_inicio > '2024-05-04' 
+ORDER BY fecha_inicio ASC
+LIMIT 10;
+
+.
+.
+.
+.
+SELECT clases.titulo , COUNT(bloques_has_clases.clases_id) as cantidad
+FROM clases
+INNER JOIN bloques_has_clases ON clases.id = bloques_has_clases.clases_id
+.
+.
+.
+.
+.
+SELECT COALESCE(nombre, '') AS nombre, COALESCE(apellido, '') AS apellido
+FROM usuarios;
+.
+.
+.
+.
+SELECT cursos.titulo, usuarios_has_cursos.usuarios_id AS cantidad_usuarios
+FROM cursos
+INNER JOIN usuarios_has_cursos 
+GROUP BY cantidad_usuarios
+LIMIT 3 
+.
+.
+.
+SELECT unidades.titulo, AVG(clases_has_unidades.clases_id)
+FROM unidades 
+INNER JOIN clases_has_unidades
+.
+.
+.
+.
+SELECT usuarios.nombre, cursos.titulo, cursos.fecha_inicio, usuarios_has_cursos.usuarios_id
+FROM usuarios
+INNER JOIN cursos, usuarios_has_cursos ON cursos.fecha_inicio > "2024-01-03" & usuarios_has_cursos.usuarios_id > 2
+.
+.
+.
+.
+SELECT *
+FROM unidades
+WHERE fecha_inicio > 'fecha_determinada' 
+ORDER BY fecha_inicio DESC
+LIMIT 5
+.
+.
+.
+.
+.
+SELECT cursos.nombre, categoria.nombre, COUNT(usuarios.id) AS cantidad_usuarios
+FROM usuarios
+JOIN categorias cat ON usuarios.categoria_id = categoria.id
+JOIN cursos ON usuarios_has_cursos.cursos_id = cursos.id
+WHERE cursos.id = 'id_curso_especifico' 
+GROUP BY categoria.nombre;
